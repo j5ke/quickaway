@@ -1,4 +1,12 @@
 <mat-card class="winner-card">
+      <button
+      mat-button
+      class="clear"
+      (click)="clearWinners()"
+      [disabled]="!winners"
+    >
+      Clear
+    </button>
     <mat-card-title class="mat-card-title">Winners</mat-card-title>
     <mat-card-content>
       <ul class="winner-list">

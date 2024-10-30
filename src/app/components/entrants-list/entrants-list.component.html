@@ -1,12 +1,12 @@
 <!-- src/app/entrants-list/entrants-list.component.html -->
 
 <mat-card class="entrants-card">
-    <mat-card-title>Entrants</mat-card-title>
+    <mat-card-title class="mat-card-title">Entrants</mat-card-title>
     <mat-card-content>
             <mat-list>
-                <mat-list-item *ngFor="let entrant of entrants;">
+                <li class="entrant" *ngFor="let entrant of entrants;">
                     {{ entrant.username }}
-                </mat-list-item>
+                </li>
             </mat-list>
     </mat-card-content>
   </mat-card>

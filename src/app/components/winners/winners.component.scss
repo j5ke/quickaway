@@ -1,16 +1,19 @@
 .winner-card {
   width: 100%;
   max-width: 600px;
-  margin: 20px;
   padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.clear {
+  color: #e4e4e4;
+  margin-top: -40px;
+}
+
 .winner-card {
     max-width: 400px;
-    margin: auto;
   }
   
   .winner-list {
