@@ -29,4 +29,8 @@ export class WinnersComponent {
       }
     );
   }
+
+  clearWinners(){
+    this.winners = null;
+  }
 }

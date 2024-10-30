@@ -1,9 +1,10 @@
 <mat-toolbar color="primary">
-    Quickaway on Kick
+    quickaway.app
   </mat-toolbar>
 
   <div class="keyword-banner">
-    <h1 class="keyword-banner-text">Keyword: <span class="keyword">{{ keyword }}</span></h1>
+    <h1 *ngIf="keyword" class="keyword-banner-text">Keyword: <span class="keyword">{{ keyword }}</span></h1>
+    <h1 *ngIf="!keyword" class="keyword-banner-text">Type anything to enter</h1>
   </div>
   <div class="container">
     <app-controls
