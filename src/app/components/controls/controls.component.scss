@@ -1,0 +1,33 @@
+.dashboard-card {
+  width: 100%;
+  max-width: 450px;
+  margin: 20px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-card-title {
+    align-self: center;
+    margin-bottom: 20px;
+}
+.load {
+  margin-bottom: 20px;
+}
+.select-winnerbutton {
+  width: 170px;
+  transition: all 0.5s ease-in-out;
+}
+.select-winnerbutton:hover {
+  width: 200px;
+  color: white;
+  background-color: rgb(109, 156, 233);
+  transition: all 0.5s ease-in-out;
+}
+.clear-entries-button {
+  width: 125px;
+}
+.allow-entries-button {
+  width: 150;
+}

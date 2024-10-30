@@ -1,0 +1,17 @@
+.entrants-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+    padding: 50px;
+    min-width: 300px;
+    min-height: 50vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+  }
+
+  .entrants-viewport {
+    height: 100%;
+    width: 100%;
+  }

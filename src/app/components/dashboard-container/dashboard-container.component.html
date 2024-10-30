@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    Quickaway on Kick
+  </mat-toolbar>
+
+  <div class="keyword-banner">
+    <h1 class="keyword-banner-text">Keyword: <span class="keyword">{{ keyword }}</span></h1>
+  </div>
+  <div class="container">
+    <app-controls
+        class="controls"
+      [winners]="winners"
+      (winnersChange)="onWinnersChange($event)"
+      (keywordChange)="onKeywordChange($event)"
+    ></app-controls>
+    <app-winners class="winners"  [winners]="winners"></app-winners>
+    <app-entrants-list></app-entrants-list>
+  </div>
+  

@@ -1,0 +1,15 @@
+<mat-card class="winner-card">
+    <mat-card-title class="mat-card-title">Winners</mat-card-title>
+    <mat-card-content>
+      <ul class="winner-list">
+        <li
+          *ngFor="let winner of winners"
+          (click)="copyUsername(winner.username)"
+          [class.copied]="copiedWinner === winner.username"
+        >
+          {{ winner.username }}
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+  
