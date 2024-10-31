@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface Entrant {
   id: string;
   username: string;
+  badges: Object[]
 }
 
 @Injectable({
@@ -45,14 +46,6 @@ export class GiveawayService {
     this.entrantsSubject.next([]);
   }
 
-  mockEnter(id: string, username: string) {
-    const entrant: Entrant = { id, username };
-    const currentEntrants = this.entrantsSubject.getValue();
-    const updatedEntrants = [...currentEntrants, entrant];
-    this.entrantsSubject.next(updatedEntrants);
-    console.log(`Mock entrant added: ${username}`);
-  }
-
   private startWebSocket(channelId: number, keyword: string) {
     const url = `wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679`;
     const urlParams = new URLSearchParams({
@@ -87,8 +80,10 @@ export class GiveawayService {
         if (content.includes(keyword.toLowerCase())) {
           const entrantId = chatData.sender.id;
           const entrantUsername = chatData.sender.username;
+          const badges = chatData.sender.identity.badges;
+          console.log(chatData.sender);
 
-          const entrant: Entrant = { id: entrantId, username: entrantUsername };
+          const entrant: Entrant = { id: entrantId, username: entrantUsername, badges: badges };
           const currentEntrants = this.entrantsSubject.getValue();
 
           if (!currentEntrants.some(e => e.id === entrantId)) {

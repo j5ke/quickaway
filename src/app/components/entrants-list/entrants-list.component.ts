@@ -8,6 +8,11 @@ import { scan, tap } from 'rxjs/operators';
 interface Entrant {
   id: string;
   username: string;
+  badges: Badge[];
+}
+
+interface Badge {
+  type: string;
 }
 
 @Component({
@@ -33,5 +38,15 @@ export class EntrantsListComponent implements OnInit {
     if (this.entrantsSubscription) {
       this.entrantsSubscription.unsubscribe();
     }
+  }
+
+  getBadgeIcon(badgeType: string): string {
+    const badgeIcons: any = {
+      'subscriber': '&#128313;', // 🔹
+      'vip': '&#128081;',        // 👑
+      'moderator': '&#128305;',  // 🛑
+      'founder': '&#9978;'       // ⚔️
+    };
+    return badgeIcons[badgeType] || '';
   }
 }
