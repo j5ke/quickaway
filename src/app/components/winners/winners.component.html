@@ -15,6 +15,9 @@
           (click)="copyUsername(winner.username)"
           [class.copied]="copiedWinner === winner.username"
         >
+        <span *ngIf="winner.badges!.length > 0">
+          <span [innerHTML]="getBadgeIcon(winner.badges[0].type)"></span>
+        </span>
           {{ winner.username }}
         </li>
       </ul>
