@@ -36,7 +36,7 @@ export class GiveawayService {
     const winners = shuffledEntrants
       .slice(0, numberOfWinners)
       .map((entrant) => {
-        return { id: entrant.id, username: entrant.username };
+        return { id: entrant.id, username: entrant.username, badges: entrant.badges };
       });
       return winners;
   }

@@ -33,4 +33,14 @@ export class WinnersComponent {
   clearWinners(){
     this.winners = null;
   }
+
+  getBadgeIcon(badgeType: string): string {
+    const badgeIcons: any = {
+      'subscriber': '&#128313;', // 🔹
+      'vip': '&#128081;',        // 👑
+      'moderator': '&#128305;',  // 🛑
+      'founder': '&#9978;'       // ⚔️
+    };
+    return badgeIcons[badgeType] || '';
+  }
 }
