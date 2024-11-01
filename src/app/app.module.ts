@@ -26,6 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WinnersComponent } from './components/winners/winners.component';
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RouterModule } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
     declarations: [
@@ -33,7 +36,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         ControlsComponent,
         WinnersComponent,
         EntrantsListComponent,
-        DashboardContainerComponent
+        DashboardContainerComponent,
+        LandingPageComponent
       ],
       imports: [
         BrowserModule,
@@ -51,6 +55,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         MatListModule,
         MatIconModule,
         ScrollingModule,
+        RouterModule,
+        AppRoutingModule
       ],
   providers: [GiveawayService],
   bootstrap: [AppComponent]
