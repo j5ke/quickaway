@@ -6,14 +6,20 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard-container.component.scss'
 })
 export class DashboardContainerComponent {
-  winners: any;
+  numberOfWinners: number = 1;
   keyword: string = "";
 
-  onWinnersChange(newWinners: any) {
-    this.winners = newWinners;
+  channelId = 0;
+
+  onNumberOfWinnersChange(newWinners: number) {
+    this.numberOfWinners = newWinners;
   }
 
   onKeywordChange(nkeyword:any){
     this.keyword = nkeyword;
+  }
+
+  onChannelLoaded(nId: number){
+    this.channelId = nId;
   }
 }

@@ -3,6 +3,18 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 20px;
+    background-color: #1E0524;
+    height: 79vh;
+  }
+
+  .navbar {
+    background-color: #613DC1;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #858AE3;
   }
 
   .controls {
@@ -19,6 +31,7 @@
     align-items: center;
     justify-content: center;
     color:rgb(225, 220, 214);
+    background-color: #1E0524;
   }
   .keyword {
     opacity: 1;

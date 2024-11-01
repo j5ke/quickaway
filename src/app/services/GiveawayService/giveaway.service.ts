@@ -16,14 +16,34 @@ export class GiveawayService {
   private entrantsSubject = new BehaviorSubject<Entrant[]>([]);
   public entrants$ = this.entrantsSubject.asObservable();
 
+  private keyword: string = "";
+
+  private channelId: number = 0;
+
   constructor() {}
 
-  allowEntries(channelId: number, keyword: string) {
-    this.startWebSocket(channelId, keyword);
+  getNumberOfEntrants(){
+    return this.entrantsSubject.getValue().length;
   }
 
-  pauseEntries(channelId: number) {
-    this.closeWebSocket(channelId);
+  allowEntries() {
+    this.startWebSocket(this.channelId, this.keyword);
+  }
+
+  pauseEntries() {
+    this.closeWebSocket(this.channelId);
+  }
+
+  setKeyword(keyword: string){
+    this.keyword = keyword;
+  }
+
+  setChannelId(channelId: number){
+    this.channelId = channelId;
+  }
+
+  getChannelId(){
+    return this.channelId;
   }
 
   selectRandomWinners( numberOfWinners: number){
@@ -81,7 +101,6 @@ export class GiveawayService {
           const entrantId = chatData.sender.id;
           const entrantUsername = chatData.sender.username;
           const badges = chatData.sender.identity.badges;
-          console.log(chatData.sender);
 
           const entrant: Entrant = { id: entrantId, username: entrantUsername, badges: badges };
           const currentEntrants = this.entrantsSubject.getValue();

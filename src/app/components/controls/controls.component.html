@@ -4,12 +4,9 @@
 
     <!-- Channel name + load -->
     <div>
-      <mat-form-field>
-        <mat-label>Kick Username</mat-label>
-        <input matInput placeholder="Enter channel name" [(ngModel)]="channelName" />
-      </mat-form-field>
+      <p class="label">Kick Channel name</p>
+      <input class="input first" placeholder="Kick channel name" [(ngModel)]="channelName" />
       <button
-        mat-button
         class="load"
         (click)="loadChannelId()"
         [disabled]="!channelName"
@@ -20,59 +17,35 @@
 
     <!-- Channel ID Display -->
     <div>
-      <mat-form-field>
-        <mat-label>Chatroom ID</mat-label>
+      <p class="label">Channel ID</p>
         <input
-          matInput
+          class="input"
           [disabled]="true"
           [(ngModel)]="channelId"
           readonly
         />
-      </mat-form-field>
     </div>
 
     <!-- Keyword Input -->
     <div>
-      <mat-form-field>
-        <mat-label>Keyword</mat-label>
+      <p class="label">Keyword</p>
         <input
           [disabled]="giveawayActive"
-          matInput
+          class="input"
           placeholder="Enter keyword for entry"
           [(ngModel)]="keyword"
           (ngModelChange)="onKeywordChange($event)"
         />
-      </mat-form-field>
+      
     </div>
 
     <!-- Number of Winners Slider -->
     <div>
-      <mat-label>Number of Winners</mat-label>
-      <mat-slider min="1" max="10" step="1">
-        <input [(ngModel)]="numberOfWinners" matSliderThumb>
-      </mat-slider>
-      <span>{{ numberOfWinners }}</span>
+      <p class="label">Number of winners</p>
+        <div class="slider-container">
+          <input (ngModelChange)="onNumberOfWinnerChange($event)" [(ngModel)]="numberOfWinners" type="range" class="slider" min="1" max="10" value="1">
+        </div>
+      <span class="numberOfWinners">{{ numberOfWinners }}</span>
     </div>
   </mat-card-content>
-
-  <!-- Action Buttons -->
-  <mat-card-actions>
-    <button
-      mat-raised-button
-      color="accent"
-      class="allow-entries-button"
-      (click)="toggleGiveaway()"
-      [disabled]="channelId === 0"
-      matTooltip="Channel ID must be loaded to allow entries"
-    >
-      {{ giveawayActive ? 'Stop Allowing Entries' : 'Allow Entries' }}
-    </button>
-    <button mat-raised-button class="select-winner-button" (click)="selectWinners()">
-      Select Winner(s)
-    </button>
-
-    <button mat-raised-button color="accent" class="clear-entries-button" (click)="clearEntries()">
-      Clear Entries
-    </button>
-  </mat-card-actions>
 </mat-card>
