@@ -37,27 +37,27 @@ import { AppRoutingModule } from './app-routing.module';
         WinnersComponent,
         EntrantsListComponent,
         DashboardContainerComponent,
-        LandingPageComponent
+        LandingPageComponent,
       ],
       imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        // Angular Material Modules
-        MatToolbarModule,
-        MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSliderModule,
-        MatListModule,
-        MatIconModule,
-        ScrollingModule,
-        RouterModule,
-        AppRoutingModule
-      ],
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // Angular Material Modules
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSliderModule,
+    MatListModule,
+    MatIconModule,
+    ScrollingModule,
+    RouterModule,
+    AppRoutingModule
+],
   providers: [GiveawayService],
   bootstrap: [AppComponent]
 })

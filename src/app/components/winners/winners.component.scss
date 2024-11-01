@@ -5,11 +5,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-color: #2D0736;
+  border: 1px solid #613DC1;
 }
 
 .clear {
-  color: #e4e4e4;
-  margin-top: -40px;
+  margin: 5px;
+  padding: 0.7rem 1rem;
+  background-color: #858AE3;
+  border-radius: 25px;
+  color: #fff;
+  border: none;
+  transition: all 0.4s ease-in-out;
+}
+
+.clear:hover {
+  background-color: white;
+  color: #2D0736;
+  cursor: pointer;
+}
+
+.clear:disabled, .clear:disabled:hover {
+  background-color: #9394a4;
+  color: grey;
+  cursor: default;
 }
 
 .winner-card {
@@ -26,7 +46,7 @@
       transition: background-color 0.3s, color 0.3s;
   
       &:hover {
-        background-color: #e4e4e4;
+        background-color: #370b41;
       }
   
       &.copied {
@@ -35,3 +55,15 @@
     }
   }
   
+  .mat-card-title {
+    align-self: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.butt-container {
+  display: flex;
+  flex-direction: row;
+}

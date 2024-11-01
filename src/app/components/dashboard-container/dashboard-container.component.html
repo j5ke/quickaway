@@ -1,5 +1,5 @@
-<mat-toolbar color="primary">
-    quickaway.app
+<mat-toolbar class="navbar">
+  <div class="logo">quickaway.app</div>
   </mat-toolbar>
 
   <div class="keyword-banner">
@@ -9,11 +9,11 @@
   <div class="container">
     <app-controls
         class="controls"
-      [winners]="winners"
-      (winnersChange)="onWinnersChange($event)"
+      (numberOfWinnersChange)="onNumberOfWinnersChange($event)"
       (keywordChange)="onKeywordChange($event)"
+      (channelLoaded)="onChannelLoaded($event)"
     ></app-controls>
-    <app-winners class="winners"  [winners]="winners"></app-winners>
-    <app-entrants-list></app-entrants-list>
+    <app-entrants-list [channelId]="channelId"></app-entrants-list>
+    <app-winners class="winners"  [numberOfWinners]="numberOfWinners"></app-winners>
   </div>
   

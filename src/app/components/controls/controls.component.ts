@@ -9,8 +9,9 @@ import { GiveawayService } from '../../services/GiveawayService/giveaway.service
 })
 export class ControlsComponent {
   @Input() winners: any;
-  @Output() winnersChange = new EventEmitter<any>();
   @Output() keywordChange = new EventEmitter<any>();
+  @Output() numberOfWinnersChange = new EventEmitter<any>();
+  @Output() channelLoaded = new EventEmitter<any>();
   channelId = 0;
   channelName = "";
   keyword = '';
@@ -35,6 +36,7 @@ export class ControlsComponent {
       (data) => {
         if (data && data.chatroom && data.chatroom.id) {
           this.channelId = data.chatroom.id;
+          this.onChannelLoaded(this.channelId);
           console.log(`Channel ID loaded: ${this.channelId}`);
         } else {
           console.error('Chatroom ID not found in the response');
@@ -48,29 +50,20 @@ export class ControlsComponent {
     );
   }
 
-  async toggleGiveaway() {
-    if (this.giveawayActive) {
-      this.giveawayService.pauseEntries(this.channelId);
-      this.giveawayActive = false;
-    } else {
-      await this.giveawayService.allowEntries(this.channelId, this.keyword);
-      this.giveawayActive = true;
-    }
-  }
-
-  selectWinners(){
-    const winners = this.giveawayService.selectRandomWinners(this.numberOfWinners);
-    this.winners = winners;
-    this.winnersChange.emit(this.winners);
-  }
-
-  clearEntries(){
-    this.giveawayService.clearEntrants();
-  }
-
   onKeywordChange(newKeyword: string) {
     this.keyword = newKeyword;
+    this.giveawayService.setKeyword(newKeyword);
     this.keywordChange.emit(newKeyword);
+  }
+
+  onNumberOfWinnerChange(n: number){
+    this.numberOfWinners = n;
+    this.numberOfWinnersChange.emit(n);
+  }
+
+  onChannelLoaded(n: number){
+    this.channelLoaded.emit(n);
+    this.giveawayService.setChannelId(n);
   }
 
   // mockEnter() {

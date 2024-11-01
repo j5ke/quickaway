@@ -1,6 +1,6 @@
 // src/app/entrants-list/entrants-list.component.ts
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GiveawayService } from '../../services/GiveawayService/giveaway.service';
 import { Observable, Subscription } from 'rxjs';
 import { scan, tap } from 'rxjs/operators';
@@ -23,6 +23,10 @@ interface Badge {
 export class EntrantsListComponent implements OnInit {
   entrants: Entrant[] = [];
   private entrantsSubscription!: Subscription;
+
+  public giveawayActive: boolean = false;
+
+  @Input() channelId: number = 0;
 
   constructor(private giveawayService: GiveawayService) {}
 
@@ -48,5 +52,19 @@ export class EntrantsListComponent implements OnInit {
       'founder': '&#9978;'       // ⚔️
     };
     return badgeIcons[badgeType] || '';
+  }
+
+  clearEntries(){
+    this.giveawayService.clearEntrants();
+  }
+
+  async toggleGiveaway() {
+    if (this.giveawayActive) {
+      this.giveawayService.pauseEntries();
+      this.giveawayActive = false;
+    } else {
+      await this.giveawayService.allowEntries();
+      this.giveawayActive = true;
+    }
   }
 }

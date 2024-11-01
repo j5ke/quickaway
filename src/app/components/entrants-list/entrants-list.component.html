@@ -1,5 +1,14 @@
 <mat-card class="entrants-card">
-    <mat-card-title class="mat-card-title">Entrants</mat-card-title>
+  <div class="butt-container">
+    <button [disabled]="entrants.length <= 0" color="accent" class="actionButton" (click)="clearEntries()">
+      Clear
+    
+    </button>
+    <button [disabled]="channelId === 0" color="accent" class="actionButton" (click)="toggleGiveaway()">
+      {{ giveawayActive ? 'Stop Allowing Entries' : 'Allow Entries' }}
+    </button>
+  </div>
+    <mat-card-title class="mat-card-title">Entries ({{entrants.length}})</mat-card-title>
     <mat-card-content>
       <mat-list>
         <li class="entrant" *ngFor="let entrant of entrants">
@@ -8,6 +17,7 @@
           </span>
           {{ entrant.username }}
         </li>
+        
       </mat-list>
     </mat-card-content>
   </mat-card>
