@@ -5,7 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 export interface Entrant {
   id: string;
   username: string;
-  badges: Object[]
+  badges: Badge[]
+}
+
+export interface Badge {
+  type: string
 }
 
 @Injectable({
@@ -20,7 +24,13 @@ export class GiveawayService {
 
   private channelId: number = 0;
 
+  private subLuck: number = 1;
+
   constructor() {}
+
+  setSubLuck(n: number){
+    this.subLuck = n;
+  }
 
   getNumberOfEntrants(){
     return this.entrantsSubject.getValue().length;
@@ -46,20 +56,41 @@ export class GiveawayService {
     return this.channelId;
   }
 
-  selectRandomWinners( numberOfWinners: number){
+  selectRandomWinners(numberOfWinners: number) {
     const entrants = this.entrantsSubject.getValue();
     if (entrants.length === 0) {
       return [];
     }
-    // Select random winners
-    const shuffledEntrants = entrants.sort(() => 0.5 - Math.random());
+  
+    const adjustedEntrants: Array<{ id: string, username: string, badges: any[] }> = [];
+  
+    entrants.forEach(entrant => {
+      console.log(entrant);
+      // Check if the entrant is a subscriber by looking for the 'subscriber' badge
+      const isSubscriber = entrant.badges.some(badge => badge.type === 'subscriber');
+  
+      // Add the entrant to the adjusted pool, giving them extra chances if they are a subscriber
+      const multiplier = isSubscriber ? this.subLuck : 1;
+      for (let i = 0; i < multiplier; i++) {
+        adjustedEntrants.push(entrant);
+      }
+    });
+  
+    // Shuffle the adjusted entrants list
+    const shuffledEntrants = adjustedEntrants.sort(() => 0.5 - Math.random());
+  
+    // Select winners from the shuffled adjusted entrants
     const winners = shuffledEntrants
       .slice(0, numberOfWinners)
-      .map((entrant) => {
-        return { id: entrant.id, username: entrant.username, badges: entrant.badges };
-      });
-      return winners;
+      .map(entrant => ({
+        id: entrant.id,
+        username: entrant.username,
+        badges: entrant.badges
+      }));
+  
+    return winners;
   }
+  
 
   clearEntrants(){
     // Clear entrants after selecting winners

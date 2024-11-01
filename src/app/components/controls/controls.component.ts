@@ -17,6 +17,7 @@ export class ControlsComponent {
   keyword = '';
   numberOfWinners = 1;
   giveawayActive = false;
+  subLuck = 1;
 
   private mockUserCount = 0;
   private simulationInterval: any;
@@ -64,6 +65,10 @@ export class ControlsComponent {
   onChannelLoaded(n: number){
     this.channelLoaded.emit(n);
     this.giveawayService.setChannelId(n);
+  }
+
+  onSubLuckChange(n: number){
+    this.giveawayService.setSubLuck(n);
   }
 
   // mockEnter() {

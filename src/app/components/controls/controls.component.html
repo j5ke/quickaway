@@ -4,7 +4,7 @@
 
     <!-- Channel name + load -->
     <div>
-      <p class="label">Kick Channel name</p>
+      <p class="label">Kick Channel Name</p>
       <input class="input first" placeholder="Kick channel name" [(ngModel)]="channelName" />
       <button
         class="load"
@@ -45,7 +45,16 @@
         <div class="slider-container">
           <input (ngModelChange)="onNumberOfWinnerChange($event)" [(ngModel)]="numberOfWinners" type="range" class="slider" min="1" max="10" value="1">
         </div>
-      <span class="numberOfWinners">{{ numberOfWinners }}</span>
+      <span class="slider-value">{{ numberOfWinners }}</span>
+    </div>
+
+    <!-- Sub Luck Slider -->
+    <div>
+      <p class="label">Extra Subscriber Luck</p>
+        <div class="slider-container">
+          <input (ngModelChange)="onSubLuckChange($event)" [(ngModel)]="subLuck" type="range" class="slider" min="1" max="4" value="1" step="0.5">
+        </div>
+      <span class="slider-value">{{ subLuck == 1 ? "No extra subscriber luck" : subLuck + "x" }}</span>
     </div>
   </mat-card-content>
 </mat-card>
