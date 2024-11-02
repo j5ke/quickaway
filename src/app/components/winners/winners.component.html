@@ -1,3 +1,4 @@
+<div class="winners-container">
 <mat-card class="winner-card">
   <div class="butt-container">
     <button
@@ -31,3 +32,18 @@
     </mat-card-content>
   </mat-card>
   
+
+  <mat-card class="winner-card bottom">
+    <mat-card-title class="mat-card-title">Winners Chat</mat-card-title>
+    <div class="chat-messages">
+      <div *ngIf="(winnersChat$ | async) as chatMessages; else noMessages">
+        <div *ngFor="let message of chatMessages" class="chat-message">
+          <strong class="username" [ngStyle]="{ color: message.entrant.color}">{{ message.senderUsername }}</strong>: {{ message.message }}
+          <div class="timestamp">{{ message.timestamp | date:'shortTime' }}</div>
+        </div>
+      </div>
+      <ng-template #noMessages>
+      </ng-template>
+    </div>
+  </mat-card>
+</div>

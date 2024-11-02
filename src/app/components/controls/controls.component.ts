@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { GiveawayService } from '../../services/GiveawayService/giveaway.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { GiveawayService } from '../../services/GiveawayService/giveaway.service
   styleUrls: ['./controls.component.scss'],
   templateUrl: './controls.component.html',
 })
-export class ControlsComponent {
+export class ControlsComponent implements OnDestroy {
   @Input() winners: any;
   @Output() keywordChange = new EventEmitter<any>();
   @Output() numberOfWinnersChange = new EventEmitter<any>();
@@ -23,6 +23,10 @@ export class ControlsComponent {
   private simulationInterval: any;
 
   constructor(private giveawayService: GiveawayService, private http: HttpClient) {}
+
+  ngOnDestroy(): void {
+    this.giveawayService.closeWebSocket(this.channelId);
+  }
 
   // Function to load the channel ID based on the channel name
   loadChannelId() {

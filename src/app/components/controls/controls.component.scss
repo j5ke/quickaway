@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2D0736;
+  background-color: #111111;
   border: 1px solid #613DC1;
 }
 
@@ -53,17 +53,20 @@
 }
 
 .input {
-  background-color: #613DC1;
+  background-color: #1d1d1d;
   border: none;
   height: 40px;
   border-radius: 10px;
   width: 90%;
-  padding: 10px;
+  padding: 5px;
   color: white;
+  transition: all 0.4s ease-in-out;
 }
 
 .input:disabled, .input:disabled:hover {
-  background-color: #7f71a4;
+  background-color: #111111;
+  padding: 0px;
+  color: #858AE3;
 }
 
 .first {
@@ -71,7 +74,7 @@
 }
 
 .input::placeholder {
-  color: #2D0736;
+  color: #7e7e7e;
 }
 
 .input:focus {
@@ -80,7 +83,7 @@
 }
 
 .input:hover {
-  background-color: #6c4dc0;
+  background-color: #161616;
 }
 
 .label {

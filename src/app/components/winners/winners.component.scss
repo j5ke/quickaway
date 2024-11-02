@@ -1,12 +1,12 @@
 .winner-card {
-  width: 100%;
-  max-width: 600px;
+  width: 400px;
+  max-width: 400px;
   padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #2D0736;
+  background-color: #111111;
   border: 1px solid #613DC1;
 }
 
@@ -66,4 +66,40 @@
 .butt-container {
   display: flex;
   flex-direction: row;
+}
+
+.bottom {
+  margin-top: 1rem;
+}
+
+.winner-card {
+  margin: 20px;
+  padding: 20px;
+}
+
+.chat-messages {
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #613DC1;
+  overflow-x: hidden;
+  word-wrap: break-word; /* Ensures long words are broken to fit the container */
+  word-break: break-word; /* Breaks long words if necessary */
+  white-space: pre-wrap; /* Preserves newlines but allows text to wrap */
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: #ffffff;
+}
+
+.username {
+  color: #613DC1;
 }
