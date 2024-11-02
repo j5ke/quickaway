@@ -9,6 +9,7 @@ interface Entrant {
   id: string;
   username: string;
   badges: Badge[];
+  color: string;
 }
 
 interface Badge {
@@ -33,6 +34,7 @@ export class EntrantsListComponent implements OnInit {
   ngOnInit() {
     this.entrantsSubscription = this.giveawayService.entrants$.subscribe(
       (entrants: any) => {
+        console.log(entrants);
         this.entrants = entrants;
       }
     );

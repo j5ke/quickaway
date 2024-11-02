@@ -15,7 +15,9 @@
           <span *ngIf="entrant.badges!.length > 0">
             <span [innerHTML]="getBadgeIcon(entrant.badges[0].type)"></span>
           </span>
-          {{ entrant.username }}
+          <span [ngStyle]="{ color: entrant.color }">
+            {{ entrant.username }}
+          </span>
         </li>
         
       </mat-list>

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GiveawayService } from '../../services/GiveawayService/giveaway.service';
+import { Observable } from 'rxjs';
+import { ChatMessage, GiveawayService } from '../../services/GiveawayService/giveaway.service';
 
 @Component({
   selector: 'app-winners',
@@ -11,8 +12,12 @@ export class WinnersComponent {
   winners: any;
   @Input() numberOfWinners!: number;
   copiedWinner: string | null = null;
+  winnersChat$: Observable<ChatMessage[]>;
 
-  constructor(private snackBar: MatSnackBar, private giveawayService: GiveawayService) {}
+  constructor(private snackBar: MatSnackBar, private giveawayService: GiveawayService) {
+        // Subscribe to the winnersChat$ observable to get the messages
+        this.winnersChat$ = this.giveawayService.winnersChat$;
+  }
 
   copyUsername(username: string) {
     navigator.clipboard.writeText(username).then(
@@ -34,6 +39,7 @@ export class WinnersComponent {
 
   clearWinners(){
     this.winners = null;
+    this.giveawayService.clearWinners();
   }
 
   getBadgeIcon(badgeType: string): string {

@@ -3,8 +3,8 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 20px;
-    background-color: #1E0524;
-    height: 79vh;
+    background: linear-gradient(290deg, #0a0a0a, #1c1c1c);
+    height: fit-content;
   }
 
   .navbar {
@@ -30,11 +30,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color:rgb(225, 220, 214);
-    background-color: #1E0524;
+    background: linear-gradient(290deg, #0a0a0a, #1c1c1c);
+    color: #e4e4e4;
   }
   .keyword {
     opacity: 1;
     font-weight: bold;
-    color:rgb(39, 69, 238);
+    color: #858AE3;
+  }
+
+  .footer {
+    padding: 1rem;
+    text-align: center;
+    border-top: 3px solid #000000;
+    background: linear-gradient(290deg, #0a0a0a, #1c1c1c);
+    color: #858AE3;
   }

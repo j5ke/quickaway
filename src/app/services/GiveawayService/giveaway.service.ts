@@ -1,15 +1,23 @@
-// giveaway.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Entrant {
   id: string;
   username: string;
-  badges: Badge[]
+  badges: Badge[];
+  color: string;
 }
 
 export interface Badge {
-  type: string
+  type: string;
+}
+
+export interface ChatMessage {
+  senderId: string;
+  senderUsername: string;
+  message: string;
+  timestamp: string;
+  entrant: Entrant;
 }
 
 @Injectable({
@@ -20,19 +28,23 @@ export class GiveawayService {
   private entrantsSubject = new BehaviorSubject<Entrant[]>([]);
   public entrants$ = this.entrantsSubject.asObservable();
 
-  private keyword: string = "";
+  private winners: Entrant[] = [];
+  private winnersChatSubject = new BehaviorSubject<ChatMessage[]>([]);
+  public winnersChat$ = this.winnersChatSubject.asObservable();
 
+  private keyword: string = '';
   private channelId: number = 0;
-
   private subLuck: number = 1;
+
+  private paused: boolean = false;
 
   constructor() {}
 
-  setSubLuck(n: number){
+  setSubLuck(n: number) {
     this.subLuck = n;
   }
 
-  getNumberOfEntrants(){
+  getNumberOfEntrants() {
     return this.entrantsSubject.getValue().length;
   }
 
@@ -40,20 +52,29 @@ export class GiveawayService {
     this.startWebSocket(this.channelId, this.keyword);
   }
 
-  pauseEntries() {
-    this.closeWebSocket(this.channelId);
+  clearWinners() {
+    this.winners = [];
+    this.winnersChatSubject.next([]);
   }
 
-  setKeyword(keyword: string){
+  setKeyword(keyword: string) {
     this.keyword = keyword;
   }
 
-  setChannelId(channelId: number){
+  setChannelId(channelId: number) {
     this.channelId = channelId;
   }
 
-  getChannelId(){
+  getChannelId() {
     return this.channelId;
+  }
+
+  clearEntrants() {
+    this.entrantsSubject.next([]);
+  }
+
+  pauseEntries() {
+    this.paused = !this.paused;
   }
 
   selectRandomWinners(numberOfWinners: number) {
@@ -61,40 +82,36 @@ export class GiveawayService {
     if (entrants.length === 0) {
       return [];
     }
-  
-    const adjustedEntrants: Array<{ id: string, username: string, badges: any[] }> = [];
-  
+
+    const adjustedEntrants: Array<{ id: string, username: string, badges: any[], color: string }> = [];
+
     entrants.forEach(entrant => {
-      console.log(entrant);
-      // Check if the entrant is a subscriber by looking for the 'subscriber' badge
       const isSubscriber = entrant.badges.some(badge => badge.type === 'subscriber');
-  
-      // Add the entrant to the adjusted pool, giving them extra chances if they are a subscriber
       const multiplier = isSubscriber ? this.subLuck : 1;
       for (let i = 0; i < multiplier; i++) {
         adjustedEntrants.push(entrant);
       }
     });
-  
-    // Shuffle the adjusted entrants list
-    const shuffledEntrants = adjustedEntrants.sort(() => 0.5 - Math.random());
-  
-    // Select winners from the shuffled adjusted entrants
-    const winners = shuffledEntrants
-      .slice(0, numberOfWinners)
-      .map(entrant => ({
-        id: entrant.id,
-        username: entrant.username,
-        badges: entrant.badges
-      }));
-  
-    return winners;
-  }
-  
 
-  clearEntrants(){
-    // Clear entrants after selecting winners
-    this.entrantsSubject.next([]);
+    const shuffledEntrants = adjustedEntrants.sort(() => 0.5 - Math.random());
+    const winnerSet = new Set<string>();
+    const winners: Array<{ id: string, username: string, badges: any[], color: string }> = [];
+
+    while (winners.length < numberOfWinners && shuffledEntrants.length > 0) {
+      const selectedEntrant = shuffledEntrants.pop();
+      if (selectedEntrant && !winnerSet.has(selectedEntrant.id)) {
+        winners.push({
+          id: selectedEntrant.id,
+          username: selectedEntrant.username,
+          badges: selectedEntrant.badges,
+          color: selectedEntrant.color
+        });
+        winnerSet.add(selectedEntrant.id);
+      }
+    }
+    
+    this.winners = winners;
+    return winners;
   }
 
   private startWebSocket(channelId: number, keyword: string) {
@@ -126,28 +143,53 @@ export class GiveawayService {
         data.event === 'App\\Events\\ChatMessageEvent'
       ) {
         const chatData = JSON.parse(data.data);
-        const content = chatData.content.toLowerCase();
+        const content = chatData.content;
+        const senderId = chatData.sender.id;
+        const senderUsername = chatData.sender.username;
+        const timestamp = chatData.timestamp;
 
-        if (content.includes(keyword.toLowerCase())) {
-          const entrantId = chatData.sender.id;
-          const entrantUsername = chatData.sender.username;
-          const badges = chatData.sender.identity.badges;
-
-          const entrant: Entrant = { id: entrantId, username: entrantUsername, badges: badges };
+        // Add entrant to the entrants pool based on the keyword (for entries)
+        if (!this.paused && content.toLowerCase().includes(keyword.toLowerCase())) {
+          const entrant: Entrant = {
+            id: senderId,
+            username: senderUsername,
+            badges: chatData.sender.identity.badges,
+            color: chatData.sender.identity.color
+          };
+          console.log(entrant);
           const currentEntrants = this.entrantsSubject.getValue();
-
-          if (!currentEntrants.some(e => e.id === entrantId)) {
+          if (!currentEntrants.some(e => e.id === senderId)) {
             const updatedEntrants = [...currentEntrants, entrant];
             this.entrantsSubject.next(updatedEntrants);
           }
         }
+
+        // Check if the sender is a winner and add the message to the winners chat
+        const isWinner = this.winners.some(winner => winner.id === senderId);
+        const entrant: Entrant = {
+          id: senderId,
+          username: senderUsername,
+          badges: chatData.sender.identity.badges,
+          color: chatData.sender.identity.color
+        };
+        if (isWinner) {
+          const chatMessage: ChatMessage = {
+            senderId,
+            senderUsername,
+            message: content,
+            timestamp,
+            entrant: entrant
+          };
+          const currentChats = this.winnersChatSubject.getValue();
+          this.winnersChatSubject.next([...currentChats, chatMessage]);
+        }
       }
     };
 
-    this.ws.onclose = () => { };
+    this.ws.onclose = () => {};
   }
 
-  private closeWebSocket(channelId: number) {
+  closeWebSocket(channelId: number) {
     if (this.ws) {
       const unsubscribeMessage = JSON.stringify({
         event: 'pusher:unsubscribe',
