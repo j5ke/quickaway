@@ -4,7 +4,7 @@
     justify-content: space-around;
     padding: 20px;
     background-color: #1E0524;
-    height: 79vh;
+    height: 85vh;
   }
 
   .navbar {
@@ -37,4 +37,12 @@
     opacity: 1;
     font-weight: bold;
     color:rgb(39, 69, 238);
+  }
+
+  .footer {
+    padding: 1rem;
+    text-align: center;
+    border: 3px solid #2C0735;
+    background-color: #1E0524;
+    color: #858AE3;
   }
