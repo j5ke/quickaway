@@ -65,7 +65,6 @@ export class GiveawayService {
     const adjustedEntrants: Array<{ id: string, username: string, badges: any[] }> = [];
   
     entrants.forEach(entrant => {
-      console.log(entrant);
       // Check if the entrant is a subscriber by looking for the 'subscriber' badge
       const isSubscriber = entrant.badges.some(badge => badge.type === 'subscriber');
   
@@ -79,17 +78,24 @@ export class GiveawayService {
     // Shuffle the adjusted entrants list
     const shuffledEntrants = adjustedEntrants.sort(() => 0.5 - Math.random());
   
-    // Select winners from the shuffled adjusted entrants
-    const winners = shuffledEntrants
-      .slice(0, numberOfWinners)
-      .map(entrant => ({
-        id: entrant.id,
-        username: entrant.username,
-        badges: entrant.badges
-      }));
+    // Use a Set to ensure unique winners
+    const winnerSet = new Set<string>();
+    const winners: Array<{ id: string, username: string, badges: any[] }> = [];
+  
+    while (winners.length < numberOfWinners && shuffledEntrants.length > 0) {
+      const selectedEntrant = shuffledEntrants.pop();
+      if (selectedEntrant && !winnerSet.has(selectedEntrant.id)) {
+        winners.push({
+          id: selectedEntrant.id,
+          username: selectedEntrant.username,
+          badges: selectedEntrant.badges
+        });
+        winnerSet.add(selectedEntrant.id);
+      }
+    }
   
     return winners;
-  }
+  }  
   
 
   clearEntrants(){
