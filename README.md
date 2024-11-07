@@ -49,7 +49,7 @@ To set up this project locally, you’ll need:
 
   Clone this repository to your local machine:
 
-    git clone https://github.com/jakelevato/quickaway.git
+    git clone https://github.com/j5ke/quickaway.git
     cd quickaway
 
 ### Install Dependencies
