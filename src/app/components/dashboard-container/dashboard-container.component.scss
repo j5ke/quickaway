@@ -15,6 +15,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #858AE3;
+    cursor: pointer;
   }
 
   .controls {
@@ -45,4 +46,14 @@
     border-top: 3px solid #000000;
     background: linear-gradient(290deg, #0a0a0a, #1c1c1c);
     color: #858AE3;
+  }
+
+  .light {
+    font-size: x-small;
+    color: #d3d3d3;
+  }
+
+  .light a {
+    color: #858AE3;
+    text-decoration: none;
   }
