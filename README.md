@@ -1,27 +1,88 @@
-# StreamerGiveaway
+# quickaway.app: Quick Kick Giveaway Picker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+Welcome to Quickaway.app – the fastest and simplest giveaway picker for Kick streamers. With Quickaway, streamers can effortlessly host giveaways with high volumes of entries, no signup required.
 
-## Development server
+## Features
+### 🚀 Quick and Easy Giveaway Management
+- No Account Needed
+- Select any Kick account, load the chat, view eligible entrants, and select winners in just a few clicks. No signup required.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 💨 1,000+ Entries Per Second
+- Scalable and Reliable
+- Quickaway is stress-tested to handle thousands of entries per second, ensuring every valid chatter is accounted for. Enjoy peace of mind with a reliable entry process.
 
-## Code scaffolding
+### 🎛️ Highly Customizable
+- Flexible Options
+    - Choose the number of winners.
+    - Apply role-based luck to give certain roles an edge.
+    - Set custom keywords for eligibility.
+    - Re-select winners as needed for continuous giveaways.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started
 
-## Build
+Quickaway requires no installation or setup. Just follow these steps:
+  1. Go to Quickaway.app.
+  2. Enter your Kick account to load chat data.
+  3. Set up your giveaway by customizing the options.
+  4. Start your giveaway and select winners instantly.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## How It Works
+### Choose Your Kick Account
+- Enter your Kick account, and Quickaway will connect to your chat to gather eligible participants.
+### Set Eligibility Criteria
+- Keywords: Only entrants who include specific keywords will be eligible.
+- Subscriber Luck: Give extra luck to subscribers if desired.
+### Run the Giveaway
+- Select the number of winners. Quickaway will randomly pick valid entrants based on your settings.
+### Announce the Winners
+- Celebrate and share the winners directly with your audience.
 
-## Running unit tests
+## Development
+### Prerequisites
+To set up this project locally, you’ll need:
+  - Node.js (latest LTS version recommended)  
+  - Angular CLI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+        npm install -g @angular/cli
 
-## Running end-to-end tests
+### Clone the Repository
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  Clone this repository to your local machine:
 
-## Further help
+    git clone https://github.com/jakelevato/quickaway.git
+    cd quickaway
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Install Dependencies
+
+   Navigate to the project folder and install the necessary packages:
+
+    npm install
+
+### Start the Development Server
+
+  Start the Angular development server:
+
+    ng serve
+
+  This will launch the app on http://localhost:4200. You can now make changes to the app and see them update live.
+
+### Build for Production
+
+To build the app for production:
+
+    ng build --prod
+
+This will create a dist/ folder with the optimized production files.
+
+
+## Benefits
+
+  - No Account Required: Streamers can get started immediately without creating an account.
+  - Speed and Reliability: Capable of handling over a thousand entries per second, ensuring a smooth and seamless experience.
+  - Customizable Giveaways: Tailor each giveaway to fit your needs with a variety of options for fairness and fun.
+
+## Why Quickaway?
+
+Quickaway is designed to offer the best experience for both streamers and participants. With its robust performance, simple setup, and customizable options, you can focus on engaging your audience without technical hassle.
+
+### Give your giveaways the kick they deserve with Quickaway.app! 🎉
