@@ -117,6 +117,7 @@ body {
     z-index: 2;
     width: 70%;
     text-align:left;
+    position: relative;
   }
   
   .hero h1 {
@@ -143,11 +144,60 @@ body {
   }
   
   /* Features Section */
+
   .features {
-    padding: 5rem 2rem;
-    background: white;
-    text-align: center;
+    position: relative;
+    z-index: 5;
+    padding: 50px 20px;
+    background-color: #F4F4F4;
+    background-image: url('../../../public/features-background.png');
+    background-size: cover; /* Make the image cover the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Space between each card container */
   }
+  
+  .card-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .card {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .left .card {
+    margin-left: auto;
+    transform: translateX(-300px); /* Offset to the left */
+    text-align: right;
+  }
+  
+  .right .card {
+    margin-right: auto;
+    transform: translateX(300px); /* Offset to the right */
+  }
+  
+  /* Optional: Responsive adjustments */
+  @media (max-width: 768px) {
+    .left .card,
+    .right .card {
+      transform: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }  
+
+  .something {
+    position: absolute;
+  }
+
   
   .features h2 {
     margin-bottom: 3rem;
@@ -163,9 +213,10 @@ body {
   
   .card {
     padding: 2rem;
-    background: #4E148C;
+    background: #e3e3e3;
     border-radius: 15px;
     transition: transform 0.3s;
+    box-shadow: none;
   }
   
   .card:hover {
@@ -173,12 +224,12 @@ body {
   }
   
   .card h3 {
-    color: white;
+    color: #858AE3;
     font-size: 1.5rem;
   }
   
   .card p {
-    color: #D1D1E9;
+    color: #a4a4a4;
   }
   
   /* Contact Section */
