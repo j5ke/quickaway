@@ -2,18 +2,25 @@
 <mat-card class="winner-card">
   <div class="butt-container">
     <button
-    class="clear"
-    (click)="clearWinners()"
-    [disabled]="!winners"
-  >
-    Clear
-  </button>
-  <button
-  class="clear"
-  (click)="selectWinners()"
->
-  Select Winners
-</button>
+      class="clear"
+      (click)="clearWinners()"
+      [disabled]="!winners"
+    >
+      Clear
+    </button>
+    <button
+      class="clear"
+      (click)="selectWinners()"
+    >
+      Select Winners
+    </button>
+    <button
+      class="clear"
+      (click)="openPrizeWheel()"
+      [disabled]="!winners"
+    >
+      Spin Prize Wheel
+    </button>
   </div>
     <mat-card-title class="mat-card-title">Winners</mat-card-title>
     <mat-card-content>

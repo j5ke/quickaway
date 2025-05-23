@@ -1,0 +1,42 @@
+<div class="wheel-container">
+  <button class="close-x" (click)="close()" aria-label="Close">&times;</button>
+  
+  <div class="split-layout">
+    <div class="config-section">
+      <h2>Configure Prizes</h2>
+      <app-prize-config 
+        [initialPrizes]="defaultPrizes"
+        (prizesUpdated)="onPrizesUpdated($event)">
+      </app-prize-config>
+    </div>
+
+    <div class="spinner-section">
+      <h2>Spin to Win!</h2>
+      <div class="ribbon-container">
+        <div class="selector-pointer"></div>
+        <div class="ribbon" [ngStyle]="{
+          transform: 'translateX(' + translateX + 'px)',
+          transition: spinning ? 'transform ' + animationDuration + 'ms cubic-bezier(0.4,0,0.2,1)' : 'none'
+        }">
+          <ng-container *ngFor="let section of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]">
+            <ng-container *ngFor="let prize of currentPrizes">
+              <div class="prize-section" [style.backgroundColor]="prize.color">
+                <span class="prize-value">${{ prize.value }}</span>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <button class="spin-button" *ngIf="!selectedPrize"
+              (click)="spin()"
+              [disabled]="spinning || !canSpin">
+        {{ spinning ? 'Spinning...' : 'SPIN!' }}
+      </button>
+
+      <div class="prize-amount" *ngIf="!spinning && selectedPrize !== null">
+        <span style="color: #858AE3; font-size: 1.5em; font-weight: bold;">You won ${{ selectedPrize }}!</span>
+      </div>
+    </div>
+  </div>
+</div>
