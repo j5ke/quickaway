@@ -1,0 +1,144 @@
+.wheel-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 30px 30px 30px;
+  background-color: #111111;
+  border-radius: 12px;
+  width: 400px;
+  color: white;
+  min-height: 480px;
+
+  h2 {
+    margin-bottom: 20px;
+    color: #858AE3;
+  }
+}
+
+.ribbon-container {
+  position: relative;
+  width: 340px;
+  height: 120px;
+  margin: 20px auto;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.ribbon {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+  backface-visibility: hidden; // Improve performance
+  transform-style: preserve-3d; // Improve performance
+}
+
+.prize-section {
+  flex: 0 0 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #222;
+  transform: translateZ(0); // Force GPU acceleration
+}
+
+.prize-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.selector-pointer {
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #858AE3;
+  z-index: 3;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -15px;
+    border-left: 2px solid #858AE3;
+    height: 150px;
+    z-index: 2;
+  }
+}
+
+.spin-button {
+  padding: 10px 30px;
+  background-color: #858AE3;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+
+  &:hover {
+    background-color: white;
+    color: #2D0736;
+  }
+
+  &:disabled {
+    background-color: #9394a4;
+    color: grey;
+    cursor: default;
+  }
+
+  &.close-button {
+    background-color: #FF6B6B;
+
+    &:hover {
+      background-color: white;
+      color: #FF6B6B;
+    }
+  }
+}
+
+.close-x {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+  line-height: 1;
+  padding: 0 8px;
+
+  &:hover {
+    color: #858AE3;
+  }
+}
+
+.prize-amount {
+  height: 40px;
+  margin: 20px 0;
+  font-size: 1.5em;
+  color: #858AE3;
+  text-align: center;
+  transition: opacity 0.3s ease;
+
+  &.show {
+    opacity: 1;
+  }
+}

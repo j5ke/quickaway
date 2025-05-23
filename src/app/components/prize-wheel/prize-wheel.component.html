@@ -1,0 +1,27 @@
+<div class="wheel-container">
+  <button class="close-x" (click)="close()" aria-label="Close">&times;</button>
+  <h2>Spin to Win!</h2>
+  <div class="ribbon-container">
+    <div class="selector-pointer"></div>
+    <div class="ribbon" [ngStyle]="{
+      transform: 'translateX(' + translateX + 'px)',
+      transition: spinning ? 'transform ' + animationDuration + 'ms cubic-bezier(0.4,0,0.2,1)' : 'none'
+    }">
+      <ng-container *ngFor="let section of [1,2,3,4,5,6,7]">
+        <ng-container *ngFor="let prize of prizes; let i = index">
+          <div class="prize-section" [style.backgroundColor]="prize.color">
+            <span class="prize-value">${{ prize.value }}</span>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <button class="spin-button" *ngIf="!selectedPrize"
+          (click)="spin()"
+          [disabled]="spinning">
+    {{ spinning ? 'Spinning...' : 'SPIN!' }}
+  </button>
+  <div class="prize-amount" *ngIf="!spinning && selectedPrize !== null">
+    <span style="color: #858AE3; font-size: 1.5em; font-weight: bold;">You won ${{ selectedPrize }}!</span>
+  </div>
+</div>
