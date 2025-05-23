@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 import { ControlsComponent } from './components/controls/controls.component';
 import { EntrantsListComponent } from './components/entrants-list/entrants-list.component';
 import { PrizeWheelComponent } from './components/prize-wheel/prize-wheel.component';
+import { PrizeConfigComponent } from './components/prize-config/prize-config.component';
 
 // Service
 import { GiveawayService } from './services/GiveawayService/giveaway.service';
@@ -41,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
         DashboardContainerComponent,
         LandingPageComponent,
         PrizeWheelComponent,
+        PrizeConfigComponent
       ],
       imports: [
     BrowserModule,

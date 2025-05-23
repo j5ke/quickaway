@@ -1,0 +1,33 @@
+<div class="prize-config-container">
+  <form [formGroup]="prizeForm">
+    <div class="prizes-list" formArrayName="prizes">
+      <div class="prize-row" *ngFor="let prize of prizes.controls; let i = index" [formGroupName]="i">
+        <div class="prize-inputs">
+          <div class="input-group">
+            <label>Value ($)</label>
+            <input type="number" formControlName="value" min="0">
+          </div>
+          <div class="input-group">
+            <label>Chance (%)</label>
+            <input type="number" formControlName="percentage" min="0" max="100" step="0.1">
+          </div>
+        </div>
+        <button type="button" class="remove-prize" 
+                (click)="removePrize(i)"
+                [disabled]="prizes.length <= 2">
+          &minus;
+        </button>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button type="button" class="add-prize" (click)="addPrize()">
+        Add Prize +
+      </button>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

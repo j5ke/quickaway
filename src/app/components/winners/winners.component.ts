@@ -65,8 +65,11 @@ export class WinnersComponent {
 
   openPrizeWheel() {
     const dialogRef = this.dialog.open(PrizeWheelComponent, {
-      width: '450px',
-      disableClose: true
+      width: '1000px',
+      height: '600px',
+      disableClose: true,
+      panelClass: 'prize-wheel-dialog',
+      maxWidth: '90vw'
     });
 
     dialogRef.afterClosed().subscribe(result => {
